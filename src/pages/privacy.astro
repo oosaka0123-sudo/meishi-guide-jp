@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; import PageHero from '../components/PageHero.astro'; import CropMarks from '../components/svg/CropMarks.astro';
+const title='プライバシーポリシー'; const description='名刺の見本帳のプライバシーポリシー。';
+---
+<BaseLayout {title} {description} path="/privacy/"><PageHero index="09" kicker="PRIVACY" title="プライバシーポリシー" lede="取得する情報、利用目的、外部サービス、免責事項についての基本方針です。"><Fragment slot="figure"><div class="privacy-visual crop-frame"><CropMarks/><span>91 × 55</span></div></Fragment></PageHero><section class="section"><div class="wrap prose"><h2>取得する情報</h2><p>お問い合わせ時に入力された氏名、メールアドレス、本文など、対応に必要な情報を取得する場合があります。</p><h2>利用目的</h2><p>お問い合わせへの回答、サイト品質改善、不正利用防止のために利用します。法令に基づく場合を除き、本人の同意なく目的外利用しません。</p><h2>アクセス解析・外部サービス</h2><p>将来アクセス解析や広告等を導入する場合は、利用サービスと取得情報を本ページへ明記します。</p><h2>免責事項</h2><p>掲載内容は確認に努めますが、印刷会社の仕様・料金・納期等は変更される場合があります。最終発注前に各事業者の最新情報をご確認ください。</p></div></section></BaseLayout><style>.privacy-visual{height:180px;border:1px solid var(--line-strong);display:grid;place-items:center;font-family:var(--font-mono);font-size:2rem;color:var(--copper)}</style>

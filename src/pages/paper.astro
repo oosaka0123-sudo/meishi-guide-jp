@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; import PageHero from '../components/PageHero.astro'; import PaperWeightChart from '../components/svg/PaperWeightChart.astro'; import EmbossFoilDiagram from '../components/svg/EmbossFoilDiagram.astro'; import NextStep from '../components/NextStep.astro';
+const title='名刺用紙・厚さ・質感'; const description='名刺用紙の厚さ、コート・マット・上質紙の違い、特殊加工の向き不向きを初心者向けに解説。';
+---
+<BaseLayout {title} {description} path="/paper/"><PageHero index="03" kicker="PAPER / WEIGHT / TEXTURE" title="紙は、デザインの半分。" lede="同じデータでも、紙が変わると触った瞬間の印象が変わります。光沢、手触り、厚み、発色を目的から選びます。"><Fragment slot="figure"><PaperWeightChart /></Fragment></PageHero><section class="section"><div class="wrap grid-editorial"><div class="col-lede prose"><h2>迷ったら「やや厚め」</h2><p>薄すぎる紙は頼りなく感じやすく、厚すぎる紙は名刺入れでかさばります。一般的なビジネス名刺なら、標準〜やや厚めが扱いやすい選択です。</p><h2>上質紙</h2><p>自然な手触りで文字中心の名刺と相性が良く、落ち着いた印象です。</p><h2>マットコート</h2><p>写真や色を見せつつ、光沢を抑えたいときに向きます。</p><h2>コート紙</h2><p>発色と光沢が強く、写真を鮮やかに見せたい用途で有利です。</p></div><div class="col-figure" data-reveal="wipe"><EmbossFoilDiagram /></div></div></section><NextStep href="/design/" label="次はレイアウトと文字へ" /></BaseLayout>

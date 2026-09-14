@@ -1,0 +1,83 @@
+---
+// Four miniature failure-case cards, used on /mistakes/.
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+<div class={`mistake-grid ${className}`}>
+  <figure class="mistake-grid__item">
+    <svg viewBox="0 0 140 88" role="img" aria-labelledby="m1t">
+      <title id="m1t">塗り足し不足で文字が切れている例</title>
+      <rect x="4" y="4" width="132" height="80" fill="#fffdf8" stroke="var(--ink)" stroke-width="1.4" />
+      <text x="70" y="50" text-anchor="middle" font-size="15" font-family="var(--font-display)" fill="var(--ink)">design studio</text>
+      <line x1="0" y1="4" x2="140" y2="4" stroke="var(--vermilion)" stroke-width="3" />
+      <text x="70" y="14" text-anchor="middle" font-size="7" fill="var(--vermilion)" font-family="var(--font-mono)">ここで切れる</text>
+    </svg>
+    <figcaption>塗り足しゼロで端の文字が断裁で切れる</figcaption>
+  </figure>
+
+  <figure class="mistake-grid__item">
+    <svg viewBox="0 0 140 88" role="img" aria-labelledby="m2t">
+      <title id="m2t">低解像度でロゴがぼやけている例</title>
+      <rect x="4" y="4" width="132" height="80" fill="#fffdf8" stroke="var(--ink)" stroke-width="1.4" />
+      <g opacity="0.55" filter="url(#px)">
+        <rect x="46" y="30" width="48" height="28" fill="var(--ink)" />
+      </g>
+      <filter id="px"><feGaussianBlur stdDeviation="1.6" /></filter>
+      <text x="70" y="76" text-anchor="middle" font-size="7" fill="var(--vermilion)" font-family="var(--font-mono)">72dpiロゴを拡大</text>
+    </svg>
+    <figcaption>低解像度データを引き伸ばし、ロゴがぼやける</figcaption>
+  </figure>
+
+  <figure class="mistake-grid__item">
+    <svg viewBox="0 0 140 88" role="img" aria-labelledby="m3t">
+      <title id="m3t">白フチが均一でない例</title>
+      <rect x="4" y="4" width="132" height="80" fill="#fffdf8" stroke="var(--ink)" stroke-width="1.4" />
+      <rect x="14" y="12" width="112" height="64" fill="var(--copper)" fill-opacity="0.35" />
+      <rect x="14" y="12" width="112" height="64" fill="none" stroke="var(--vermilion)" stroke-width="1" stroke-dasharray="2 2" />
+      <text x="70" y="80" text-anchor="middle" font-size="7" fill="var(--vermilion)" font-family="var(--font-mono)">左右で白フチの幅が違う</text>
+    </svg>
+    <figcaption>断裁ズレを想定せず白フチの幅が不均一</figcaption>
+  </figure>
+
+  <figure class="mistake-grid__item">
+    <svg viewBox="0 0 140 88" role="img" aria-labelledby="m4t">
+      <title id="m4t">情報が多すぎて可読性が低い例</title>
+      <rect x="4" y="4" width="132" height="80" fill="#fffdf8" stroke="var(--ink)" stroke-width="1.4" />
+      {Array.from({ length: 7 }).map((_, i) => (
+        <line x1="14" y1={14 + i * 9} x2="126" y2={14 + i * 9} stroke="var(--ink)" stroke-width="2.4" opacity="0.75" />
+      ))}
+    </svg>
+    <figcaption>情報を詰め込みすぎて余白がなく読みづらい</figcaption>
+  </figure>
+</div>
+
+<style>
+  .mistake-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line-strong);
+    border: 1px solid var(--line-strong);
+  }
+  .mistake-grid__item {
+    margin: 0;
+    background: var(--paper-deep);
+    padding: 1rem;
+  }
+  .mistake-grid__item svg {
+    width: 100%;
+    height: auto;
+  }
+  .mistake-grid__item figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+  }
+  @media (max-width: 520px) {
+    .mistake-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

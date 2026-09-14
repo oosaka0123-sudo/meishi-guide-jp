@@ -1,0 +1,257 @@
+---
+// Full-viewport opening sequence for the home page only. No video/image
+// assets: layered "paper sheet" divs, an SVG crop-mark frame and kinetic
+// type. Hidden by default so it never shows without JS or for users who
+// have already seen it (sessionStorage) or who prefer reduced motion.
+---
+<div id="opening" class="opening" hidden aria-hidden="true">
+  <div class="opening__sheet opening__sheet--3" aria-hidden="true"></div>
+  <div class="opening__sheet opening__sheet--2" aria-hidden="true"></div>
+  <div class="opening__sheet opening__sheet--1" aria-hidden="true"></div>
+
+  <svg class="opening__marks" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <g stroke="#c33e1f" stroke-width="0.3" fill="none">
+      <path d="M4 10 V4 H10" />
+      <path d="M96 10 V4 H90" />
+      <path d="M4 90 V96 H10" />
+      <path d="M96 90 V96 H90" />
+    </g>
+  </svg>
+
+  <div class="opening__type">
+    <span class="opening__line">名刺という、</span>
+    <span class="opening__line">紙の見本帳。</span>
+  </div>
+
+  <p class="opening__note" aria-hidden="true">91 × 55mm — MEISHI GUIDE JP</p>
+
+  <button type="button" id="opening-skip" class="opening__skip">
+    スキップ <span class="opening__skip-en">Skip</span>
+  </button>
+</div>
+
+<style>
+  .opening {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .opening[hidden] {
+    display: none;
+  }
+
+  .opening__sheet {
+    position: absolute;
+    inset: 0;
+    background: var(--paper-deep);
+    border: 1px solid var(--line-strong);
+  }
+
+  .opening__sheet--1 {
+    background: var(--paper);
+    z-index: 3;
+  }
+  .opening__sheet--2 {
+    background: var(--paper-deep);
+    z-index: 2;
+  }
+  .opening__sheet--3 {
+    background: var(--paper-edge);
+    z-index: 1;
+  }
+
+  .opening__marks {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+  }
+
+  .opening__type {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 8vw, 5rem);
+    line-height: 1.25;
+    color: var(--ink);
+  }
+
+  .opening__line {
+    display: inline-block;
+    overflow: hidden;
+  }
+
+  .opening__note {
+    position: absolute;
+    z-index: 5;
+    bottom: clamp(1.5rem, 5vw, 3rem);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    margin: 0;
+  }
+
+  .opening__skip {
+    position: absolute;
+    z-index: 6;
+    top: clamp(1.25rem, 4vw, 2rem);
+    right: clamp(1.25rem, 4vw, 2rem);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4em;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink);
+    font-size: 0.9rem;
+  }
+
+  .opening__skip:hover {
+    border-color: var(--vermilion);
+    color: var(--vermilion);
+  }
+
+  .opening__skip-en {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+  }
+
+  /* animated state: sheets fan out, type reveals line by line */
+  html[data-motion="on"] .opening.is-active .opening__sheet--3 {
+    animation: sheet-drift 1.6s var(--ease-editorial) forwards;
+  }
+  html[data-motion="on"] .opening.is-active .opening__sheet--2 {
+    animation: sheet-drift-2 1.6s var(--ease-editorial) forwards;
+  }
+  html[data-motion="on"] .opening.is-active .opening__marks {
+    opacity: 0;
+    animation: marks-in 0.6s ease forwards 0.2s;
+  }
+  html[data-motion="on"] .opening.is-active .opening__line {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(0.3em);
+    animation: line-reveal 0.8s var(--ease-editorial) forwards;
+  }
+  html[data-motion="on"] .opening.is-active .opening__line:nth-child(1) {
+    animation-delay: 0.5s;
+  }
+  html[data-motion="on"] .opening.is-active .opening__line:nth-child(2) {
+    animation-delay: 0.95s;
+  }
+  html[data-motion="on"] .opening.is-active .opening__note,
+  html[data-motion="on"] .opening.is-active .opening__skip {
+    opacity: 0;
+    animation: fade-in 0.6s ease forwards 1.4s;
+  }
+
+  html[data-motion="on"] .opening.is-leaving {
+    animation: opening-out 0.6s var(--ease-editorial) forwards;
+  }
+
+  @keyframes sheet-drift {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+      transform: translate(-4%, 3%) rotate(-1.4deg);
+    }
+  }
+  @keyframes sheet-drift-2 {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+      transform: translate(3%, -2%) rotate(1deg);
+    }
+  }
+  @keyframes marks-in {
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes line-reveal {
+    to {
+      clip-path: inset(0 0 0% 0);
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes opening-out {
+    to {
+      opacity: 0;
+      transform: scale(0.99);
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const KEY = "meishi-intro-seen";
+    const el = document.getElementById("opening");
+    if (!el) return;
+
+    let reduce = false;
+    try {
+      reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch {
+      /* noop */
+    }
+
+    let seen = false;
+    try {
+      seen = sessionStorage.getItem(KEY) === "1";
+    } catch {
+      /* noop */
+    }
+
+    if (seen || reduce) {
+      el.remove();
+      return;
+    }
+
+    el.hidden = false;
+    el.removeAttribute("aria-hidden");
+    el.classList.add("is-active");
+    document.body.style.overflow = "hidden";
+
+    let done = false;
+    function finish() {
+      if (done) return;
+      done = true;
+      try {
+        sessionStorage.setItem(KEY, "1");
+      } catch {
+        /* noop */
+      }
+      document.body.style.overflow = "";
+      el.classList.add("is-leaving");
+      setTimeout(() => el.remove(), 650);
+    }
+
+    const skip = document.getElementById("opening-skip");
+    skip?.addEventListener("click", finish);
+    const timer = setTimeout(finish, 2800);
+    skip?.addEventListener("click", () => clearTimeout(timer));
+  })();
+</script>

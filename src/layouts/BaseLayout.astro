@@ -1,0 +1,145 @@
+﻿---
+import { ClientRouter } from "astro:transitions";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { ALL_ROUTES } from "../data/nav";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  ogImage?: string;
+  structuredData?: Record<string, unknown>[];
+  noBreadcrumb?: boolean;
+}
+
+const {
+  title,
+  description,
+  path,
+  ogImage = "/og-image.svg",
+  structuredData = [],
+  noBreadcrumb = false,
+} = Astro.props;
+
+const siteName = "名刺の見本帳 — MEISHI GUIDE JP";
+const pageTitle = path === "/" ? title : `${title}｜${siteName}`;
+const canonicalURL = new URL(path, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+
+const breadcrumbList = (() => {
+  if (noBreadcrumb || path === "/") return null;
+  const segments = path.split("/").filter(Boolean);
+  const items = [{ href: "/", label: "トップ" }];
+  let acc = "";
+  for (const seg of segments) {
+    acc += `/${seg}`;
+    const match = ALL_ROUTES.find((r) => r.href === `${acc}/`);
+    items.push({ href: `${acc}/`, label: match ? match.label : seg });
+  }
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.label,
+      item: new URL(item.href, Astro.site).toString(),
+    })),
+  };
+})();
+
+const websiteSchema =
+  path === "/"
+    ? {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: siteName,
+        url: Astro.site?.toString(),
+        description,
+        inLanguage: "ja",
+      }
+    : null;
+
+const allSchemas = [websiteSchema, breadcrumbList, ...structuredData].filter(Boolean);
+---
+<!DOCTYPE html>
+<html lang="ja" data-motion="on">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="mask-icon" href="/favicon.svg" color="#1d1a17" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <meta name="theme-color" content="#f7f3ec" />
+    <ClientRouter fallback="swap" />
+
+    {allSchemas.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
+
+    <style is:global>
+      @import "../styles/global.css";
+    </style>
+
+    <script is:inline>
+      (function () {
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        document.documentElement.setAttribute("data-motion", reduce ? "off" : "on");
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">本文へスキップ</a>
+    <slot name="opening" />
+    <Nav path={path} />
+    <main id="main" class="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      const groups = document.querySelectorAll("[data-reveal-group]");
+      groups.forEach((group) => {
+        Array.from(group.children).forEach((child, i) => {
+          (child as HTMLElement).style.setProperty("--i", String(i));
+        });
+      });
+
+      const targets = document.querySelectorAll("[data-reveal], .draw-underline");
+      if ("IntersectionObserver" in window && targets.length) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-in");
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2, rootMargin: "0px 0px -8% 0px" }
+        );
+        targets.forEach((t) => io.observe(t));
+      } else {
+        targets.forEach((t) => t.classList.add("is-in"));
+      }
+    </script>
+  </body>
+</html>
+

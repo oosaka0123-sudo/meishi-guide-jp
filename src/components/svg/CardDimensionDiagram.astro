@@ -1,0 +1,86 @@
+---
+// Illustrates trim / bleed / safe-area for the standard 91×55mm Japanese
+// business card. Values are representative (3mm bleed / 5mm safe margin),
+// the copy around this figure states them as general guidance.
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+<figure class={`dim-diagram ${className}`}>
+  <svg
+    viewBox="0 0 320 210"
+    role="img"
+    aria-labelledby="dimTitle dimDesc"
+    width="100%"
+  >
+    <title id="dimTitle">名刺の仕上がりサイズ・塗り足し・safe areaの図解</title>
+    <desc id="dimDesc">
+      91mm×55mmの仕上がり線を中心に、外側3mmの塗り足し線、内側の安全余白線を示す図。
+    </desc>
+
+    <!-- bleed (outer, dashed vermilion) -->
+    <rect
+      x="52" y="46" width="216" height="128"
+      fill="none" stroke="var(--vermilion, #c33e1f)" stroke-width="1.2"
+      stroke-dasharray="4 3"
+    />
+    <!-- trim (solid ink) -->
+    <rect
+      x="60" y="54" width="200" height="112"
+      fill="#fffdf8" fill-opacity="0.5"
+      stroke="var(--ink, #1d1a17)" stroke-width="1.6"
+    />
+    <!-- safe area (inner, dashed copper) -->
+    <rect
+      x="82" y="76" width="156" height="68"
+      fill="none" stroke="var(--copper, #a9702f)" stroke-width="1.2"
+      stroke-dasharray="2.5 3"
+    />
+
+    <!-- corner crop ticks on trim corners -->
+    <g stroke="var(--ink, #1d1a17)" stroke-width="1">
+      <path d="M60 40 V50 M50 54 H60" />
+      <path d="M260 40 V50 M270 54 H260" />
+      <path d="M60 180 V170 M50 166 H60" />
+      <path d="M260 180 V170 M270 166 H260" />
+    </g>
+
+    <!-- width dimension line (91mm) -->
+    <g stroke="var(--ink-muted, #5c564d)" stroke-width="1">
+      <line x1="60" y1="190" x2="260" y2="190" />
+      <line x1="60" y1="185" x2="60" y2="195" />
+      <line x1="260" y1="185" x2="260" y2="195" />
+    </g>
+    <text x="160" y="204" text-anchor="middle" font-size="11" fill="var(--ink-muted, #5c564d)" font-family="var(--font-mono, monospace)">91mm（仕上がり幅）</text>
+
+    <!-- height dimension line (55mm) -->
+    <g stroke="var(--ink-muted, #5c564d)" stroke-width="1">
+      <line x1="284" y1="54" x2="284" y2="166" />
+      <line x1="279" y1="54" x2="289" y2="54" />
+      <line x1="279" y1="166" x2="289" y2="166" />
+    </g>
+    <text x="298" y="112" text-anchor="middle" font-size="11" fill="var(--ink-muted, #5c564d)" font-family="var(--font-mono, monospace)" transform="rotate(90 298 112)">55mm（仕上がり高さ）</text>
+
+    <!-- legend -->
+    <g font-family="var(--font-mono, monospace)" font-size="10.5">
+      <line x1="16" y1="16" x2="30" y2="16" stroke="var(--vermilion, #c33e1f)" stroke-width="1.4" stroke-dasharray="4 3" />
+      <text x="34" y="19.5" fill="var(--ink, #1d1a17)">塗り足し（仕上がり+3mm 目安）</text>
+
+      <rect x="16" y="30" width="14" height="8" fill="none" stroke="var(--ink, #1d1a17)" stroke-width="1.4" />
+      <text x="34" y="37.5" fill="var(--ink, #1d1a17)">仕上がり線（91×55mm）</text>
+
+      <line x1="16" y1="46" x2="30" y2="46" stroke="var(--copper, #a9702f)" stroke-width="1.4" stroke-dasharray="2.5 3" />
+      <text x="34" y="49.5" fill="var(--ink, #1d1a17)">安全余白（内側5mm 目安）</text>
+    </g>
+  </svg>
+</figure>
+
+<style>
+  .dim-diagram {
+    margin: 0;
+    padding: clamp(1rem, 3vw, 1.75rem);
+    background: var(--paper-deep);
+    border: 1px solid var(--line-strong);
+  }
+</style>

@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; import PageHero from '../components/PageHero.astro'; import CardDimensionDiagram from '../components/svg/CardDimensionDiagram.astro'; import NextStep from '../components/NextStep.astro';
+const title='名刺サイズ・規格'; const description='日本の標準名刺サイズ91×55mmを基準に、塗り足し・安全マージン・変形サイズの考え方を図解。';
+---
+<BaseLayout {title} {description} path="/size/"><PageHero index="02" kicker="SIZE / BLEED / SAFE AREA" title="91×55mm。その外側と内側が大切。" lede="完成サイズだけでなく、裁断のズレを吸収する塗り足しと、文字を守る安全域まで考えるのが印刷データの基本です。"><Fragment slot="figure"><CardDimensionDiagram /></Fragment></PageHero><section class="section"><div class="wrap grid-editorial"><div class="col-lede prose"><h2>標準サイズは91×55mm</h2><p>日本で最も一般的な4号名刺です。名刺入れに収まりやすく、ビジネス用途では迷ったらこのサイズが基準です。</p><h2>塗り足し</h2><p>背景色や写真を端まで出す場合、仕上がり線の外側にも3mm程度伸ばします。裁断がわずかにずれても白い縁が出にくくなります。</p><h2>安全マージン</h2><p>名前や電話番号など重要情報は仕上がり線から少なくとも3〜5mm内側へ。端に寄せすぎると見た目も窮屈になります。</p></div></div></section><NextStep href="/paper/" label="紙の厚みと質感を見る" /></BaseLayout>

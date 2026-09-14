@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; import PageHero from '../components/PageHero.astro'; import ColorSeparationMark from '../components/svg/ColorSeparationMark.astro'; import NextStep from '../components/NextStep.astro';
+const title='名刺印刷・入稿の基礎'; const description='CMYK、塗り足し、画像解像度、PDF入稿、校正など、名刺印刷で失敗しやすいポイントを整理。';
+---
+<BaseLayout {title} {description} path="/printing/"><PageHero index="05" kicker="PRINT / DATA CHECK" title="画面の完成と、印刷の完成は違う。" lede="色、裁断、画像、フォント。印刷には画面では見えにくい条件があります。入稿前に4点だけ確認すれば、多くの事故は避けられます。"><Fragment slot="figure"><ColorSeparationMark /></Fragment></PageHero><section class="section"><div class="wrap grid-editorial"><div class="col-lede prose"><h2>CMYKを意識する</h2><p>画面のRGBと印刷のCMYKでは再現できる色域が違います。鮮やかなネオン色などは沈んで見えることがあります。</p><h2>画像は十分な解像度で</h2><p>小さな名刺でも、低解像度画像は輪郭が甘くなります。印刷会社の推奨値を確認し、拡大表示で粗さを確認します。</p><h2>PDFは最終確認してから</h2><p>文字化け、画像抜け、裁ち落とし、余白、ページ向き。書き出したPDFそのものを開いて確認します。</p><div class="callout"><strong>安全策：</strong>初回は小ロットで試刷りし、色と厚みを実物で確認してから増刷します。</div></div></div></section><NextStep href="/mistakes/" label="よくある失敗を見る" /></BaseLayout>

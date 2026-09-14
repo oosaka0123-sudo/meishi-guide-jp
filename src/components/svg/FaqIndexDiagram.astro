@@ -1,0 +1,40 @@
+---
+// Stacked index-tab motif representing FAQ categories, used on /faq/.
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+
+const tabs = [
+  { label: "サイズ", n: "01" },
+  { label: "用紙", n: "02" },
+  { label: "印刷", n: "03" },
+  { label: "デザイン", n: "04" },
+];
+---
+<figure class={`faq-index ${className}`}>
+  <svg viewBox="0 0 300 140" role="img" aria-labelledby="fiTitle fiDesc" width="100%">
+    <title id="fiTitle">FAQのカテゴリーを示す索引タブの図</title>
+    <desc id="fiDesc">サイズ・用紙・印刷・デザインの4つの索引タブが少しずつ重なって並ぶ図。</desc>
+    {tabs.map((t, i) => {
+      const y = 8 + i * 26;
+      return (
+        <g>
+          <rect x="8" y={y} width="230" height="22" fill="var(--paper, #f7f3ec)" stroke="var(--ink, #1d1a17)" stroke-width="1.1" />
+          <rect x="238" y={y + 2} width="46" height="18" fill="var(--paper-deep, #efe8da)" stroke="var(--vermilion, #c33e1f)" stroke-width="1.1" />
+          <text x="261" y={y + 15} text-anchor="middle" font-size="9" font-family="var(--font-mono, monospace)" fill="var(--vermilion, #c33e1f)">{t.n}</text>
+          <text x="22" y={y + 15.5} font-size="11" font-family="var(--font-display, serif)" fill="var(--ink, #1d1a17)">{t.label}</text>
+        </g>
+      );
+    })}
+  </svg>
+</figure>
+
+<style>
+  .faq-index {
+    margin: 0;
+    padding: clamp(1rem, 3vw, 1.75rem);
+    background: var(--paper-deep);
+    border: 1px solid var(--line-strong);
+  }
+</style>

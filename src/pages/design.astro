@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; import PageHero from '../components/PageHero.astro'; import LayoutGridDiagram from '../components/svg/LayoutGridDiagram.astro'; import NextStep from '../components/NextStep.astro';
+const title='名刺デザインの基本'; const description='名刺の情報設計、文字サイズ、余白、配色、QRコード配置を初心者向けに解説。';
+---
+<BaseLayout {title} {description} path="/design/"><PageHero index="04" kicker="DESIGN / HIERARCHY" title="目立たせるより、順番をつくる。" lede="名刺は小さい紙面です。全部を大きくするのではなく、名前、所属、連絡先に視線の順番をつけると読みやすくなります。"><Fragment slot="figure"><LayoutGridDiagram /></Fragment></PageHero><section class="section"><div class="wrap grid-editorial"><div class="col-lede prose"><h2>情報は3段階に分ける</h2><p><strong>第一情報：</strong>名前。<strong>第二情報：</strong>会社名・肩書き。<strong>第三情報：</strong>電話・メール・住所・URL。重要度に合わせて文字サイズと余白を変えます。</p><h2>余白を怖がらない</h2><p>空白は「何もない場所」ではなく、情報を分けて読みやすくする機能です。四辺5mm前後を基準にすると窮屈になりにくいです。</p><h2>色は2〜3色まで</h2><p>本文は濃い色、ブランドカラーは強調に限定。小さい面積ほど色数を絞ると品位が出ます。</p></div></div></section><NextStep href="/printing/" label="印刷データの確認へ" /></BaseLayout>

@@ -1,0 +1,72 @@
+---
+import CropMarks from "./svg/CropMarks.astro";
+
+interface Props {
+  index: string;
+  total?: string;
+  kicker: string;
+  title: string;
+  lede: string;
+  align?: "left" | "wide";
+}
+const { index, total = "09", kicker, title, lede, align = "left" } = Astro.props;
+---
+<section class={`page-hero page-hero--${align} crop-frame section`}>
+  <CropMarks />
+  <span class="page-hero__num" aria-hidden="true">{index}</span>
+  <div class="wrap page-hero__inner">
+    <p class="section-counter">{index} / {total}</p>
+    <p class="kicker">{kicker}</p>
+    <h1 class="display-1" data-reveal="mask">{title}</h1>
+    <p class="lede page-hero__lede" data-reveal="rise">{lede}</p>
+    <div class="page-hero__figure">
+      <slot name="figure" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    padding-block: clamp(3rem, 7vw, 5.5rem) clamp(2.5rem, 6vw, 4rem);
+    border-top: 0;
+    overflow: clip;
+  }
+
+  .page-hero__num {
+    position: absolute;
+    top: clamp(-1.5rem, -4vw, 0rem);
+    right: clamp(0.5rem, 3vw, 3rem);
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 16vw, 12rem);
+    line-height: 0.8;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--line-strong);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 1.1rem;
+    max-width: 46em;
+  }
+
+  .page-hero--wide .page-hero__inner {
+    max-width: none;
+  }
+
+  .page-hero__lede {
+    max-width: 34em;
+  }
+
+  .page-hero__figure:empty {
+    display: none;
+  }
+
+  .page-hero__figure {
+    margin-top: 1.5rem;
+    max-width: 40rem;
+  }
+</style>

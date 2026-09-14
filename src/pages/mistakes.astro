@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; import PageHero from '../components/PageHero.astro'; import MistakesDiagram from '../components/svg/MistakesDiagram.astro'; import NextStep from '../components/NextStep.astro';
+const title='名刺でよくある失敗と対策'; const description='文字切れ、情報過多、読みにくい配色、薄すぎる紙、QRコードの読み取り不良などを対策付きで解説。';
+---
+<BaseLayout {title} {description} path="/mistakes/"><PageHero index="06" kicker="MISTAKES / RECOVERY" title="失敗は、印刷前に見つける。" lede="名刺の失敗は、ほとんどが小さな確認漏れです。よくある事故を先に見れば、初回発注でも回避できます。"><Fragment slot="figure"><MistakesDiagram /></Fragment></PageHero><section class="section"><div class="wrap grid-editorial"><div class="col-lede prose"><h2>文字が切れた</h2><p>重要文字を端に寄せすぎない。安全マージンを確保し、塗り足しと仕上がり線を混同しないこと。</p><h2>情報が多くて読めない</h2><p>名刺は会社案内ではありません。渡した相手が「誰で、何をしていて、どう連絡するか」を優先します。</p><h2>QRコードが読めない</h2><p>小さくしすぎず、周囲に余白を取り、印刷後の実物で複数端末から読み取り確認します。</p><h2>紙が思ったより薄い</h2><p>画面では分からない要素です。厚み表記とサンプル請求、少部数テストを活用します。</p></div></div></section><NextStep href="/faq/" label="疑問をまとめて解決する" /></BaseLayout>

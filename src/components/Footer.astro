@@ -1,0 +1,113 @@
+---
+import { NAV_ITEMS, FOOTER_ITEMS } from "../data/nav";
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap site-footer__grid">
+    <div class="site-footer__brand">
+      <p class="site-footer__ja">名刺の見本帳</p>
+      <p class="site-footer__en">MEISHI GUIDE JP</p>
+      <p class="site-footer__desc">
+        名刺を初めて作る人のための、作り方・サイズ・用紙・デザイン・印刷ガイド。
+      </p>
+    </div>
+
+    <nav class="site-footer__nav" aria-label="フッターナビゲーション">
+      <p class="site-footer__heading">ガイド</p>
+      <ul>
+        {NAV_ITEMS.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav class="site-footer__nav" aria-label="サイト情報">
+      <p class="site-footer__heading">サイト情報</p>
+      <ul>
+        {FOOTER_ITEMS.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+
+  <div class="wrap site-footer__bottom">
+    <p>&copy; {year} MEISHI GUIDE JP</p>
+    <p class="site-footer__note">紙面のように、少しずつ更新していきます。</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--line-strong);
+    background: var(--paper-deep);
+    padding-block: clamp(2.5rem, 5vw, 4rem) 1.5rem;
+  }
+
+  .site-footer__grid {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 700px) {
+    .site-footer__grid {
+      grid-template-columns: 1.4fr 1fr 1fr;
+    }
+  }
+
+  .site-footer__ja {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  .site-footer__en {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    margin-top: 0.3rem;
+  }
+
+  .site-footer__desc {
+    margin-top: 1rem;
+    color: var(--ink-muted);
+    font-size: 0.92rem;
+    max-width: 30em;
+  }
+
+  .site-footer__heading {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    margin: 0 0 1rem;
+  }
+
+  .site-footer__nav li + li {
+    margin-top: 0.65rem;
+  }
+
+  .site-footer__nav a {
+    text-decoration: none;
+    color: var(--ink-muted);
+    font-size: 0.92rem;
+  }
+
+  .site-footer__nav a:hover {
+    color: var(--vermilion);
+  }
+
+  .site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+  }
+</style>

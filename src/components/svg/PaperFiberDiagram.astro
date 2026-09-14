@@ -1,0 +1,54 @@
+---
+// Compares a smooth coated stock against an uncoated stock where fibers are
+// visible under magnification, used on /paper/.
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+
+const fibers = Array.from({ length: 26 }).map((_, i) => {
+  const x1 = 8 + ((i * 37) % 130);
+  const y1 = 10 + ((i * 53) % 90);
+  const len = 10 + ((i * 17) % 16);
+  const angle = (i * 67) % 180;
+  const rad = (angle * Math.PI) / 180;
+  const x2 = x1 + len * Math.cos(rad);
+  const y2 = y1 + len * Math.sin(rad);
+  return { x1, y1, x2, y2 };
+});
+---
+<figure class={`fiber-diagram ${className}`}>
+  <svg viewBox="0 0 300 120" role="img" aria-labelledby="fbTitle fbDesc" width="100%">
+    <title id="fbTitle">コート紙と非コート紙の表面比較図</title>
+    <desc id="fbDesc">
+      左側は表面が滑らかなコート紙、右側は繊維が見える非コート紙（上質紙）の表面を拡大したイメージ図。
+    </desc>
+
+    <g transform="translate(0,0)">
+      <rect x="4" y="4" width="140" height="100" fill="var(--paper, #f7f3ec)" stroke="var(--ink, #1d1a17)" stroke-width="1.2" />
+      {Array.from({ length: 5 }).map((_, i) => (
+        <line x1="14" y1={20 + i * 16} x2="134" y2={20 + i * 16} stroke="var(--line-strong, rgba(29,26,23,.4))" stroke-width="0.6" />
+      ))}
+      <text x="74" y="98" text-anchor="middle" font-size="10" font-family="var(--font-mono, monospace)" fill="var(--ink-muted, #5c564d)">コート紙（滑らか）</text>
+    </g>
+
+    <g transform="translate(156,0)">
+      <rect x="4" y="4" width="140" height="100" fill="var(--paper-deep, #efe8da)" stroke="var(--ink, #1d1a17)" stroke-width="1.2" />
+      <g stroke="var(--copper, #a9702f)" stroke-width="0.7" opacity="0.75">
+        {fibers.map((f) => (
+          <line x1={f.x1 + 4} y1={f.y1 + 4} x2={f.x2 + 4} y2={f.y2 + 4} />
+        ))}
+      </g>
+      <text x="74" y="98" text-anchor="middle" font-size="10" font-family="var(--font-mono, monospace)" fill="var(--ink-muted, #5c564d)">上質紙（繊維が見える）</text>
+    </g>
+  </svg>
+</figure>
+
+<style>
+  .fiber-diagram {
+    margin: 0;
+    padding: clamp(1rem, 3vw, 1.75rem);
+    background: var(--paper-deep);
+    border: 1px solid var(--line-strong);
+  }
+</style>

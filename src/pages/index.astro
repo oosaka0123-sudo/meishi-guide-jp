@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; import OpeningSequence from '../components/OpeningSequence.astro'; import SampleBookStack from '../components/svg/SampleBookStack.astro';
+const title='名刺の見本帳 — はじめてでも、迷わずつくれる。'; const description='名刺の作り方、サイズ、紙、デザイン、印刷、失敗対策まで。紙とインクの手触りで理解する名刺ガイド。';
+---
+<BaseLayout {title} {description} path="/">
+  <Fragment slot="opening"><OpeningSequence /></Fragment>
+  <section class="section home-hero"><div class="wrap grid-editorial"><div class="col-lede"><p class="kicker">MEISHI / FIRST PRINCIPLES</p><h1 class="display-1" data-reveal="mask">名刺を、<br/><span class="draw-underline">正しく美しく</span>つくる。</h1><p class="lede" data-reveal="rise">サイズは91×55mm。けれど、良い名刺は寸法だけでは決まりません。情報、余白、紙、印刷。その順番を、初めての人にも迷わない形で。</p><div class="hero-links"><a class="btn" href="/how-to/">最初からつくる <span class="btn-arrow">→</span></a><a class="btn btn--ghost" href="/mistakes/">失敗だけ先に知る</a></div></div><div class="col-figure" data-reveal="wipe"><SampleBookStack /></div></div></section>
+  <section class="section"><div class="wrap"><p class="section-counter">01 / 03</p><h2 class="display-2">3つの入口。</h2><div class="entry-grid"><a href="/how-to/"><b>早く</b><span>完成までの順番を知る</span></a><a href="/design/"><b>美しく</b><span>余白と情報設計を整える</span></a><a href="/paper/"><b>触感まで</b><span>紙と厚みを選ぶ</span></a></div></div></section>
+  <section class="section"><div class="wrap grid-editorial"><div class="col-lede prose"><p class="kicker">WHY THIS GUIDE</p><h2 class="heading-1">専門用語より先に、判断基準を。</h2><p>塗り足し、トンボ、CMYK。印刷には聞き慣れない言葉が多くあります。このサイトでは、用語を覚える前に「なぜ必要か」を図で示します。</p><p><a class="underline-link" href="/size/">まずサイズと余白を見る →</a></p></div></div></section>
+</BaseLayout>
+<style>.home-hero{min-height:calc(100svh - 72px);display:grid;align-items:center}.hero-links{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}.entry-grid{display:grid;border-top:1px solid var(--line-strong);margin-top:2rem}.entry-grid a{display:grid;grid-template-columns:5rem 1fr;gap:1rem;padding:1.4rem 0;border-bottom:1px solid var(--line);text-decoration:none}.entry-grid b{font-family:var(--font-display);font-size:1.5rem;color:var(--vermilion)}@media(min-width:800px){.entry-grid{grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line)}.entry-grid a{grid-template-columns:1fr;min-height:11rem;padding:1.5rem;border-right:1px solid var(--line-strong)}} </style>

@@ -1,0 +1,40 @@
+---
+// The "paper sample book" motif for the home page: stacked swatches with
+// index tabs echoing the eight guide sections.
+const tabs = ["作り方", "サイズ", "用紙", "デザイン", "印刷", "失敗例"];
+---
+<figure class="sample-stack">
+  <svg viewBox="0 0 360 260" role="img" aria-labelledby="ssTitle ssDesc" width="100%">
+    <title id="ssTitle">名刺という紙見本帳のイメージ</title>
+    <desc id="ssDesc">複数の紙見本が少しずつずれて重なり、右端にインデックスタブが並ぶ図。</desc>
+    {tabs.map((t, i) => {
+      const y = 18 + i * 8;
+      const x = 20 + i * 6;
+      const shade = 0.9 - i * 0.06;
+      return (
+        <g>
+          <rect
+            x={x} y={y} width="260" height="150"
+            fill={`rgba(247,243,236,${shade})`}
+            stroke="var(--line-strong, rgba(29,26,23,.4))"
+            stroke-width="1"
+          />
+          <rect x={x + 260} y={y + 14} width="26" height="24" fill="var(--paper-deep, #efe8da)" stroke="var(--ink, #1d1a17)" stroke-width="1" />
+          <text x={x + 273} y={y + 30} text-anchor="middle" font-size="8" font-family="var(--font-mono, monospace)" fill="var(--ink, #1d1a17)">{String(i + 1).padStart(2, "0")}</text>
+        </g>
+      );
+    })}
+    <g transform="translate(40,58)">
+      <line x1="0" y1="0" x2="60" y2="60" stroke="var(--ink, #1d1a17)" stroke-width="1" />
+      <line x1="60" y1="0" x2="0" y2="60" stroke="var(--ink, #1d1a17)" stroke-width="1" />
+      <text x="0" y="92" font-size="16" font-family="var(--font-display, serif)" fill="var(--ink, #1d1a17)">名刺見本帳</text>
+      <text x="0" y="112" font-size="10" font-family="var(--font-mono, monospace)" fill="var(--ink-muted, #5c564d)" letter-spacing="0.08em">A GUIDE TO BUSINESS CARDS</text>
+    </g>
+  </svg>
+</figure>
+
+<style>
+  .sample-stack {
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,68 @@
+---
+// Comparative thickness diagram for common Japanese business-card paper
+// weights (kg/四六判連量), used on /paper/.
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+
+const weights = [
+  { kg: "180kg", mm: "0.18mm", h: 18, note: "薄め・軽い印象" },
+  { kg: "220kg", mm: "0.22mm", h: 26, note: "標準的な厚み" },
+  { kg: "260kg", mm: "0.27mm", h: 34, note: "しっかりした定番" },
+  { kg: "350kg", mm: "0.35mm", h: 46, note: "高級感・重厚" },
+];
+---
+<figure class={`weight-chart ${className}`}>
+  <svg viewBox="0 0 320 200" role="img" aria-labelledby="wcTitle wcDesc" width="100%">
+    <title id="wcTitle">用紙の厚み（連量）比較図</title>
+    <desc id="wcDesc">180kgから350kgまでの代表的な連量と、断面の厚みイメージを比較する図。</desc>
+    <line x1="30" y1="168" x2="310" y2="168" stroke="var(--ink, #1d1a17)" stroke-width="1.2" />
+    {weights.map((w, i) => {
+      const x = 46 + i * 68;
+      const y = 168 - w.h;
+      return (
+        <g>
+          <rect x={x} y={y} width="40" height={w.h} fill="none" stroke="var(--ink, #1d1a17)" stroke-width="1.4" />
+          <rect x={x} y={y} width="40" height={w.h} fill="var(--copper, #a9702f)" fill-opacity={0.12 + i * 0.08} />
+          <text x={x + 20} y={y - 8} text-anchor="middle" font-size="11" font-family="var(--font-mono, monospace)" fill="var(--ink, #1d1a17)">{w.kg}</text>
+          <text x={x + 20} y="182" text-anchor="middle" font-size="10" font-family="var(--font-mono, monospace)" fill="var(--ink-muted, #5c564d)">{w.mm}</text>
+        </g>
+      );
+    })}
+  </svg>
+  <ul class="weight-chart__legend">
+    {weights.map((w) => (
+      <li><strong>{w.kg}</strong><span>{w.note}</span></li>
+    ))}
+  </ul>
+</figure>
+
+<style>
+  .weight-chart {
+    margin: 0;
+    padding: clamp(1rem, 3vw, 1.75rem);
+    background: var(--paper-deep);
+    border: 1px solid var(--line-strong);
+  }
+  .weight-chart__legend {
+    margin-top: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem 1.5rem;
+    font-size: 0.85rem;
+  }
+  .weight-chart__legend li {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    border-top: 1px solid var(--line);
+    padding-top: 0.4rem;
+    color: var(--ink-muted);
+  }
+  .weight-chart__legend strong {
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-weight: 600;
+  }
+</style>

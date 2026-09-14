@@ -1,0 +1,18 @@
+---
+interface Props {
+  label: string;
+  href: string;
+  hint?: string;
+}
+const { label, href, hint = "次に読む" } = Astro.props;
+---
+<div class="next-step" data-reveal="rise">
+  <div>
+    <p class="eyebrow-index">{hint}</p>
+    <p class="heading-2" style="margin-top:0.4rem;">{label}</p>
+  </div>
+  <a class="btn" href={href}>
+    <span>読む</span>
+    <span class="btn-arrow" aria-hidden="true">→</span>
+  </a>
+</div>

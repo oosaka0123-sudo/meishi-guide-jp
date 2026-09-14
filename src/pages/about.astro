@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; import PageHero from '../components/PageHero.astro'; import SampleBookStack from '../components/svg/SampleBookStack.astro'; import NextStep from '../components/NextStep.astro';
+const title='このサイトについて'; const description='名刺の見本帳が、初心者に分かりやすく、広告都合に寄らない情報設計を目指す理由と編集方針。';
+---
+<BaseLayout {title} {description} path="/about/"><PageHero index="08" kicker="ABOUT / EDITORIAL POLICY" title="売る前に、分かること。" lede="このサイトは、名刺を初めて作る人が、専門用語や広告に振り回されず、自分で判断できる状態をつくるためのガイドです。"><Fragment slot="figure"><SampleBookStack /></Fragment></PageHero><section class="section"><div class="wrap grid-editorial"><div class="col-lede prose"><h2>編集方針</h2><p>結論を先に書き、専門用語は図解し、料金や仕様は確認日を意識します。比較を行う場合は、良い点だけでなく弱点も同じ基準で扱います。</p><h2>一次情報を増やす</h2><p>今後、実際の発注、紙サンプル、印刷結果、写真比較を追加し、他サイトの要約だけで終わらない情報に育てます。</p><h2>「日本一わかりやすい」の意味</h2><p>情報量の多さではなく、初めての人が次に何をすればよいか迷わないことを基準にします。</p></div></div></section><NextStep href="/how-to/" label="名刺づくりを始める" /></BaseLayout>

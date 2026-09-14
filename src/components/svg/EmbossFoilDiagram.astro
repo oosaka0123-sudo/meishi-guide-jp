@@ -1,0 +1,46 @@
+---
+// Side-profile cross-sections comparing flat print / emboss / foil stamping,
+// used on /printing/.
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+<figure class={`finish-diagram ${className}`}>
+  <svg viewBox="0 0 320 150" role="img" aria-labelledby="fdTitle fdDesc" width="100%">
+    <title id="fdTitle">印刷加工の断面比較図（平台・空押し・箔押し）</title>
+    <desc id="fdDesc">平台印刷、エンボス（空押し）、箔押しの3種類の紙の断面イメージを比較する図。</desc>
+
+    <!-- flat print -->
+    <g transform="translate(10,20)">
+      <rect x="0" y="40" width="88" height="14" fill="var(--paper-deep, #efe8da)" stroke="var(--ink, #1d1a17)" stroke-width="1.2" />
+      <rect x="18" y="36" width="52" height="4" fill="var(--ink, #1d1a17)" />
+      <text x="44" y="70" text-anchor="middle" font-size="10.5" font-family="var(--font-mono, monospace)" fill="var(--ink, #1d1a17)">平台印刷</text>
+      <text x="44" y="84" text-anchor="middle" font-size="9" fill="var(--ink-muted, #5c564d)">インクが紙面に乗る</text>
+    </g>
+
+    <!-- emboss -->
+    <g transform="translate(120,20)">
+      <path d="M0 44 Q44 20 88 44 V54 H0 Z" fill="var(--paper-deep, #efe8da)" stroke="var(--ink, #1d1a17)" stroke-width="1.2" />
+      <text x="44" y="70" text-anchor="middle" font-size="10.5" font-family="var(--font-mono, monospace)" fill="var(--ink, #1d1a17)">空押し（エンボス）</text>
+      <text x="44" y="84" text-anchor="middle" font-size="9" fill="var(--ink-muted, #5c564d)">紙自体を凸状に</text>
+    </g>
+
+    <!-- foil -->
+    <g transform="translate(230,20)">
+      <rect x="0" y="40" width="88" height="14" fill="var(--paper-deep, #efe8da)" stroke="var(--ink, #1d1a17)" stroke-width="1.2" />
+      <rect x="18" y="34" width="52" height="6" fill="var(--copper, #a9702f)" />
+      <text x="44" y="70" text-anchor="middle" font-size="10.5" font-family="var(--font-mono, monospace)" fill="var(--ink, #1d1a17)">箔押し</text>
+      <text x="44" y="84" text-anchor="middle" font-size="9" fill="var(--ink-muted, #5c564d)">金属箔を熱転写</text>
+    </g>
+  </svg>
+</figure>
+
+<style>
+  .finish-diagram {
+    margin: 0;
+    padding: clamp(1rem, 3vw, 1.75rem);
+    background: var(--paper-deep);
+    border: 1px solid var(--line-strong);
+  }
+</style>

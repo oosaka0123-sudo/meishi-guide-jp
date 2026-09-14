@@ -1,0 +1,34 @@
+---
+// CMYK registration-mark motif illustrating color separation / print
+// registration, used on /printing/.
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+<figure class={`color-sep ${className}`}>
+  <svg viewBox="0 0 240 160" role="img" aria-labelledby="csTitle csDesc" width="100%">
+    <title id="csTitle">CMYK版ズレ（見当）のイメージ図</title>
+    <desc id="csDesc">シアン・マゼンタ・イエロー・黒の4版がわずかにズレて重なる、印刷の見当を表す図。</desc>
+    <g transform="translate(70,80)" opacity="0.85">
+      <circle r="26" cx="-3" cy="-2" stroke="#00AEEF" stroke-width="1.4" fill="none" />
+      <circle r="26" cx="2" cy="-3" stroke="#EC008C" stroke-width="1.4" fill="none" />
+      <circle r="26" cx="1" cy="3" stroke="#FFDE17" stroke-width="1.4" fill="none" />
+      <circle r="26" cx="0" cy="0" stroke="var(--ink, #1d1a17)" stroke-width="1.4" fill="none" />
+      <line x1="-34" y1="0" x2="34" y2="0" stroke="var(--ink, #1d1a17)" stroke-width="0.8" />
+      <line x1="0" y1="-34" x2="0" y2="34" stroke="var(--ink, #1d1a17)" stroke-width="0.8" />
+    </g>
+    <text x="150" y="60" font-size="11" font-family="var(--font-mono, monospace)" fill="var(--ink, #1d1a17)">C M Y K</text>
+    <text x="150" y="78" font-size="9" fill="var(--ink-muted, #5c564d)">4版を重ねてフルカラーに</text>
+    <text x="150" y="96" font-size="9" fill="var(--ink-muted, #5c564d)">わずかなズレが「見当」</text>
+  </svg>
+</figure>
+
+<style>
+  .color-sep {
+    margin: 0;
+    padding: clamp(1rem, 3vw, 1.75rem);
+    background: var(--paper-deep);
+    border: 1px solid var(--line-strong);
+  }
+</style>

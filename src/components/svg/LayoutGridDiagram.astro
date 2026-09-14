@@ -1,0 +1,60 @@
+---
+// Shows a sound margin / column structure for a 91x55mm card, used on /design/.
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+<figure class={`layout-diagram ${className}`}>
+  <svg viewBox="0 0 320 210" role="img" aria-labelledby="ldTitle ldDesc" width="100%">
+    <title id="ldTitle">名刺デザインのグリッドと余白の図解</title>
+    <desc id="ldDesc">名刺の仕上がり枠内に、余白・列グリッド・要素の配置例を示す図。</desc>
+
+    <rect x="40" y="40" width="240" height="130" fill="#fffdf8" fill-opacity="0.5" stroke="var(--ink, #1d1a17)" stroke-width="1.6" />
+
+    <!-- safe margin -->
+    <rect x="58" y="56" width="204" height="98" fill="none" stroke="var(--copper, #a9702f)" stroke-width="1" stroke-dasharray="2.5 3" />
+
+    <!-- column guides -->
+    <g stroke="var(--line-strong, rgba(29,26,23,.4))" stroke-width="0.8" stroke-dasharray="1.5 2.5">
+      <line x1="126" y1="56" x2="126" y2="154" />
+      <line x1="194" y1="56" x2="194" y2="154" />
+    </g>
+
+    <!-- logo mark -->
+    <rect x="58" y="56" width="26" height="26" fill="none" stroke="var(--ink, #1d1a17)" stroke-width="1.4" />
+    <line x1="63" y1="61" x2="79" y2="77" stroke="var(--ink, #1d1a17)" stroke-width="1" />
+    <line x1="79" y1="61" x2="63" y2="77" stroke="var(--ink, #1d1a17)" stroke-width="1" />
+
+    <!-- name block -->
+    <text x="58" y="110" font-size="15" font-family="var(--font-display, serif)" fill="var(--ink, #1d1a17)">山田 太郎</text>
+    <text x="58" y="126" font-size="9" font-family="var(--font-mono, monospace)" fill="var(--ink-muted, #5c564d)" letter-spacing="0.05em">DESIGNER</text>
+
+    <!-- contact block, right aligned to safe margin -->
+    <g font-size="8.5" font-family="var(--font-mono, monospace)" fill="var(--ink-muted, #5c564d)" text-anchor="end">
+      <text x="262" y="130">tel 000-0000-0000</text>
+      <text x="262" y="142">mail hello@example.jp</text>
+    </g>
+
+    <!-- baseline ticks -->
+    <g stroke="var(--vermilion, #c33e1f)" stroke-width="0.8">
+      <line x1="54" y1="110" x2="58" y2="110" />
+      <line x1="54" y1="126" x2="58" y2="126" />
+    </g>
+  </svg>
+  <p class="layout-diagram__cap">安全余白（点線）の内側に、グリッドで要素を揃える。</p>
+</figure>
+
+<style>
+  .layout-diagram {
+    margin: 0;
+    padding: clamp(1rem, 3vw, 1.75rem);
+    background: var(--paper-deep);
+    border: 1px solid var(--line-strong);
+  }
+  .layout-diagram__cap {
+    margin-top: 1rem;
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+  }
+</style>

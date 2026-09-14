@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'; import PageHero from '../../components/PageHero.astro'; import ProcessFlowDiagram from '../../components/svg/ProcessFlowDiagram.astro'; import NextStep from '../../components/NextStep.astro';
+const title='名刺の作り方 完全ガイド'; const description='初めての名刺作りを、目的整理から印刷発注まで7ステップで解説。';
+---
+<BaseLayout {title} {description} path="/how-to/"><PageHero index="01" kicker="HOW TO" title="名刺は、順番で失敗を減らせる。" lede="最初にデザインソフトを開く必要はありません。目的、載せる情報、サイズ、余白、紙、印刷の順で決めれば迷いません。"><Fragment slot="figure"><ProcessFlowDiagram /></Fragment></PageHero><section class="section"><div class="wrap grid-editorial"><div class="col-lede prose"><h2>7ステップ</h2><ol><li>誰に渡す名刺か決める</li><li>載せる情報を絞る</li><li>91×55mmを基準にサイズを決める</li><li>安全マージンを確保する</li><li>紙と厚みを選ぶ</li><li>印刷データを確認する</li><li>小部数で試してから本発注する</li></ol><div class="callout"><strong>最重要：</strong>名前・会社名・連絡先を目立たせる順番を先に決めると、デザインが崩れにくくなります。</div></div></div></section><section class="section"><div class="wrap"><h2 class="display-2">迷ったら、標準から。</h2><p class="lede">横91×55mm、文字は端から5mm以上内側、読みやすいゴシックか明朝、紙は標準〜やや厚め。個性は土台を守ってから足します。</p></div></section><NextStep href="/size/" label="次はサイズと余白へ" /></BaseLayout>
