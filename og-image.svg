@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f7f3ec" />
+  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#1d1a17" stroke-width="1.4" />
+  <g stroke="#1d1a17" stroke-width="1.2">
+    <path d="M40 90 H90 M70 40 V90" />
+    <path d="M1160 90 H1110 M1130 40 V90" />
+    <path d="M40 540 H90 M70 590 V540" />
+    <path d="M1160 540 H1110 M1130 590 V540" />
+  </g>
+  <text x="100" y="270" font-family="'Hiragino Mincho ProN','Yu Mincho',serif" font-size="88" fill="#1d1a17">名刺の作り方</text>
+  <text x="100" y="360" font-family="'Hiragino Mincho ProN','Yu Mincho',serif" font-size="88" fill="#1d1a17">紙の見本帳ガイド</text>
+  <text x="100" y="420" font-family="monospace" font-size="24" letter-spacing="2" fill="#c33e1f">MEISHI GUIDE JP — 91×55mm</text>
+  <circle cx="1080" cy="500" r="34" fill="none" stroke="#a9702f" stroke-width="1.4" />
+  <line x1="1080" y1="466" x2="1080" y2="534" stroke="#a9702f" stroke-width="1" />
+  <line x1="1046" y1="500" x2="1114" y2="500" stroke="#a9702f" stroke-width="1" />
+</svg>
