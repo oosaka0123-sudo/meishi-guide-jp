@@ -24,8 +24,11 @@ const {
 
 const siteName = "名刺の見本帳 — MEISHI GUIDE JP";
 const pageTitle = path === "/" ? title : `${title}｜${siteName}`;
-const canonicalURL = new URL(path, Astro.site);
-const ogImageURL = new URL(ogImage, Astro.site);
+const siteBaseURL = new URL(import.meta.env.BASE_URL, Astro.site);
+const toAbsoluteURL = (value: string) =>
+  new URL(value.replace(/^\/+/, ""), siteBaseURL);
+const canonicalURL = toAbsoluteURL(path);
+const ogImageURL = toAbsoluteURL(ogImage);
 
 const breadcrumbList = (() => {
   if (noBreadcrumb || path === "/") return null;
@@ -44,7 +47,7 @@ const breadcrumbList = (() => {
       "@type": "ListItem",
       position: i + 1,
       name: item.label,
-      item: new URL(item.href, Astro.site).toString(),
+      item: toAbsoluteURL(item.href).toString(),
     })),
   };
 })();
@@ -55,7 +58,7 @@ const websiteSchema =
         "@context": "https://schema.org",
         "@type": "WebSite",
         name: siteName,
-        url: Astro.site?.toString(),
+        url: siteBaseURL.toString(),
         description,
         inLanguage: "ja",
       }
